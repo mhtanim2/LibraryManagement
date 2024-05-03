@@ -1,0 +1,60 @@
+﻿
+@model IEnumerable<Author> //Now we have the villa model
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="h1 text-white py-2">This is Author List</div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <div class="row pb-3">
+            <div class="col-6">
+            </div>
+            <div class="col-6 text-end">
+                <a asp-controller="Author" asp-action="Create" class="btn btn-secondary">
+                    <i class="bi bi-plus-circle"></i>  Create New Author
+                </a>
+            </div>
+        </div>
+        <table class="table table-bordered text-center table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Id
+                    </th>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Bio
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td>@obj.AuthorId</td>
+                        <td>@obj.AuthorName</td>
+                        <td>@obj.AuthorBio</td>
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="Author" asp-action="Update" asp-route-AuthorId="@obj.AuthorId" class="btn btn-success mx-2">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                                <a asp-controller="Author" asp-action="Delete" asp-route-AuthorId="@obj.AuthorId" class="btn btn-danger mx-2">
+                                    <i class="bi bi-trash-fill"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,81 @@
+﻿@model Author // Here we have the villa model
+@{
+    string action = ViewBag.Action ?? string.Empty;
+}
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                @if (action.ToLower() == "update")
+                {
+                    <h2 class="text-white py-2">Update Author</h2>
+                }
+                else if (action.ToLower() == "create")
+                {
+                    <h2 class="text-white py-2">Create Author</h2>
+                }
+                else
+                {
+                    <h2 class="text-white py-2">Delete Author</h2>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <div class=" p-3">
+                <div asp-validation-summary="All"></div>
+                <div class="form-floating py-2 col-12">
+                    @if (action.ToLower() == "delete")
+                    {
+                        <input asp-for="AuthorName" class="form-control border shadow" disabled/>
+                    }
+                    else
+                    {
+                        <input asp-for="AuthorName" class="form-control border shadow" />
+                    }
+
+                    <label asp-for="AuthorName" class="ms-2"></label>
+                    <span asp-validation-for="AuthorName" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                            @if (action.ToLower() == "delete")
+                            {
+                                <textarea id="rtDescription" asp-for="AuthorBio" class="form-control border shadow summernote" disabled></textarea>
+
+                            }
+                            else
+                            {
+                                <textarea id="rtDescription" asp-for="AuthorBio" class="form-control border shadow summernote"></textarea>
+
+                            }
+
+                    <label asp-for="AuthorBio" class="ms-2"></label>
+                    <span asp-validation-for="AuthorBio" class="text-danger"></span>
+                </div>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        @if (action.ToLower() == "update")
+                        {
+                            <button type="submit" class="btn btn-success form-control">Update</button>
+                        }
+                        else if (action.ToLower() == "create")
+                        {
+                            <button type="submit" class="btn btn-success form-control">Create</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-success form-control">Delete</button>
+                        }
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Author" asp-action="Index" class="btn btn-outline-secondary border  form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

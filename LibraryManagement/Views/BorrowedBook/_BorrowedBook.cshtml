@@ -1,0 +1,122 @@
+﻿@model BorrowedBookVM 
+@{
+    string action = ViewBag.Action ?? string.Empty;
+}
+
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                @if (action.ToLower() == "update")
+                {
+                    <h2 class="text-white py-2">Update BorrowedBook</h2>
+                }
+                else if (action.ToLower() == "create")
+                {
+                    <h2 class="text-white py-2">Create BorrowedBook</h2>
+                }
+                else
+                {
+                    <h2 class="text-white py-2">Delete BorrowedBook</h2>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="card-body border p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <input asp-for="BorrowedBook.BorrowId" hidden />
+
+            <div class=" p-3">
+                <div asp-validation-summary="All"></div>
+
+                <div class="form-floating py-2 col-12">
+                    @if (action.ToLower() == "delete")
+                    {
+                        <select asp-for="BorrowedBook.BookId" asp-items="@Model.BookList" class="form-select border shadow" disabled>
+                            <option disabled selected>--Select Book--</option>
+                        </select>
+                    }
+                    else
+                    {
+
+                        <select asp-for="BorrowedBook.BookId" asp-items="@Model.BookList" class="form-select border shadow">
+                            <option disabled selected>--Select Book--</option>
+                        </select>
+                    }
+                    <label asp-for="BorrowedBook.BookId" class="ms-2"></label>
+                    <span asp-validation-for="BorrowedBook.BookId" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-2 col-12">
+                    @if (action.ToLower() == "delete")
+                    {
+                        <select asp-for="BorrowedBook.MemberId" asp-items="@Model.MemberList" class="form-select border shadow" disabled>
+                            <option disabled selected>--Select Member--</option>
+                        </select>
+                    }
+                    else
+                    {
+
+                        <select asp-for="BorrowedBook.MemberId" asp-items="@Model.MemberList" class="form-select border shadow">
+                            <option disabled selected>--Select Member--</option>
+                        </select>
+                    }
+                    <label asp-for="BorrowedBook.MemberId" class="ms-2"></label>
+                    <span asp-validation-for="BorrowedBook.MemberId" class="text-danger"></span>
+                </div> 
+                <div class="form-floating py-2 col-12">
+                    @if (action.ToLower() == "delete")
+                    {
+                        <select asp-for="BorrowedBook.StatusId" asp-items="@Model.StatusList" class="form-select border shadow" disabled>
+                            <option disabled selected>--Select Status--</option>
+                        </select>
+                    }
+                    else
+                    {
+
+                        <select asp-for="BorrowedBook.StatusId" asp-items="@Model.StatusList" class="form-select border shadow">
+                            <option disabled selected>--Select Status--</option>
+                        </select>
+                    }
+                    <label asp-for="BorrowedBook.StatusId" class="ms-2"></label>
+                    <span asp-validation-for="BorrowedBook.StatusId" class="text-danger"></span>
+                </div>
+                
+                <div class="form-floating py-2 col-12">
+                    @if (action.ToLower() == "delete")
+                    {
+                        <input type="date" asp-for="BorrowedBook.ReturnDate" class="form-control border shadow" disabled />
+                    }
+                    else
+                    {
+                        <input type="date" asp-for="BorrowedBook.ReturnDate" class="form-control border shadow" />
+                    }
+
+                    <label asp-for="BorrowedBook.ReturnDate" class="ms-2"></label>
+                    <span asp-validation-for="BorrowedBook.ReturnDate" class="text-danger"></span>
+                </div>
+
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        @if (action.ToLower() == "update")
+                        {
+                            <button type="submit" class="btn btn-success form-control">Update</button>
+                        }
+                        else if (action.ToLower() == "create")
+                        {
+                            <button type="submit" class="btn btn-success form-control">Create</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-success form-control">Delete</button>
+                        }
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="BorrowedBook" asp-action="Index" class="btn btn-outline-secondary border  form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
